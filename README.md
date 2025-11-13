@@ -38,7 +38,8 @@ df.isna().sum() to inspect missing values
 What I observed:
 There were no missing values in any important column, including the target. This allowed me to proceed without imputation.
 
-Exploratory Data Analysis (EDA)
+# Exploratory Data Analysis (EDA)
+
 Engagement Level Distribution
 
 I plotted the distribution of the target variable to check for class imbalance.
