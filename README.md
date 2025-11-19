@@ -1,4 +1,5 @@
 Predictive Analysis of Player Engagement and Retention
+
 🌟 Project Overview
 
 I performed a predictive analysis to understand and predict player engagement in online gaming. I focused on determining whether player behavioral metrics such as playtime, session frequency, and demographic information could accurately predict engagement level (High, Medium, Low).
