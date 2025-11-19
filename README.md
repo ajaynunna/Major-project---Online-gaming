@@ -40,7 +40,7 @@ SessionsPerWeek vs Engagement: I observed that High engagement players tend to h
 
 I visualized these patterns using boxplots and histograms to better understand the distributions.
 
-🛠 Step 3 — Feature Engineering
+ Step 3 — Feature Engineering
 
 I created new features to improve model prediction accuracy:
 
