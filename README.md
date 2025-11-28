@@ -1,107 +1,128 @@
-Predictive Analysis of Player Engagement and Retention
+# Player Engagement Level Prediction using Machine Learning
 
- Project Overview
+This project focuses on predicting player engagement levels (High, Medium, Low) in online gaming using supervised machine learning models. The goal is to understand which gameplay and demographic factors influence player engagement, and to build a model that can accurately classify user behavior.
 
-I performed a predictive analysis to understand and predict player engagement in online gaming. I focused on determining whether player behavioral metrics such as playtime, session frequency, and demographic information could accurately predict engagement level (High, Medium, Low).
+# Project Overview
 
-The goal of this project is to develop classification models that can help inform strategies for improving player retention and optimizing game design.
+I used a  Kaggle-style dataset containing 40,034 players with features such as:
 
-Research Question:
-I explored: Can various player behavioral metrics accurately predict player engagement level, and what are the strongest predictors?
+Age, Gender, Location
 
-Dataset:
-I used the Predict Online Gaming Behavior Dataset from Kaggle: Link to Dataset
+GameGenre, GameDifficulty
 
-Number of rows: 40,034
+PlayTimeHours
 
-Number of columns: 13
+SessionsPerWeek
 
-Target variable: EngagementLevel (Categorical: Low, Medium, High)
+AvgSessionDuration
 
- Step 1 — Data Loading and Inspection
+PlayerLevel, Achievements
 
-I loaded the dataset into a Pandas DataFrame and performed basic inspection:
+TotalPlayPerWeek (engineered feature)
 
-I used df.info() and df.describe() to check the structure and summary statistics.
+AgeGroup (engineered feature)
 
-I observed that the dataset had no missing values in key columns.
+I built five machine learning models, evaluated them, and optimized the best-performing ones using RandomizedSearchCV.
 
-I checked the target distribution and observed Low engagement players were the most common, followed by Medium and High engagement players.
+The final selected model is Gradient Boosting, achieving 91% accuracy.
 
- Step 2 — Exploratory Data Analysis (EDA)
+ Key Steps in the Workflow
+#  Exploratory Data Analysis (EDA)
 
-I explored the relationship between player features and engagement:
+I analyzed distributions and relationships using:
 
-Age vs Engagement: I observed that age distribution was fairly similar across engagement levels.
+Engagement level distribution plot
 
-PlayTimeHours vs Engagement: I observed that total playtime was slightly higher for Medium and High engagement players.
+Boxplots: Age vs Engagement, PlayTime vs Engagement
 
-SessionsPerWeek vs Engagement: I observed that High engagement players tend to have more sessions per week than Medium or Low players.
+SessionsPerWeek distribution
 
-I visualized these patterns using boxplots and histograms to better understand the distributions.
+Correlation heatmap
 
- Step 3 — Feature Engineering
+Pair plots
 
-I created new features to improve model prediction accuracy:
+ Key Insights:
 
-TotalPlayPerWeek — calculated as PlayTimeHours * SessionsPerWeek.
-I observed that this feature captured the total weekly engagement more effectively.
+Engagement levels were well balanced
 
-AgeGroup — I binned age into categories: Teen, YoungAdult, Adult, MidAge, Senior.
-I observed that this categorical feature could help models better capture age-related patterns.
+SessionsPerWeek was the strongest predictor
 
-I visualized these features:
+Age had little effect
 
-Histogram of TotalPlayPerWeek
+Low correlation across features → models perform well
 
-Boxplot of TotalPlayPerWeek vs EngagementLevel
+# Data Preprocessing
+ Separated numerical and categorical features
+ Applied One-Hot Encoding → 27 final features
+ Used StandardScaler for numerical scaling
+ Performed train–test split (80/20)
+ Ensured balanced target distribution in train & test sets
 
-Count of players in each AgeGroup
+#  Model Building
 
- Step 4 — Preprocessing
+I trained the following base models:
 
-I performed preprocessing to prepare data for modeling:
+Logistic Regression
 
-I encoded categorical variables: Gender, Location, GameDifficulty, GameGenre, AgeGroup.
+Decision Tree
 
-I scaled numerical features: Age, PlayTimeHours, SessionsPerWeek, TotalPlayPerWeek.
+Random Forest
 
-I split the dataset into train and test sets using an 80/20 split.
+Support Vector Machine (SVM)
 
- Step 5 — Model Training and Hyperparameter Tuning
+Gradient Boosting
 
-I trained multiple classification models:
+ Best Base Model: Gradient Boosting (90.5% accuracy)
 
-Logistic Regression — I tuned C, penalty, and solver using RandomizedSearchCV.
-I observed that adjusting regularization improved model performance slightly.
+#  Hyperparameter Tuning
 
-Decision Tree — I trained a default decision tree and observed moderate performance.
+Using RandomizedSearchCV, I optimized all five models.
 
-Random Forest — I tuned n_estimators, max_depth, and min_samples_split.
-I observed that this model achieved higher accuracy than a single decision tree.
+ Final Best Model: Gradient Boosting
 
-Gradient Boosting — I tuned learning_rate, n_estimators, and max_depth.
-I observed this model performed the best among all tree-based models.
+ Accuracy: 91.02%
 
-SVM — I tuned C, kernel, and gamma.
-I observed that SVM performed well but slightly lower than Gradient Boosting and Random Forest.
+Best Parameters:
+{n_estimators=150, max_depth=5, learning_rate=0.05, min_samples_split=2}
 
- Step 6 — Model Evaluation and Comparison
+# 5️ Feature Importance Analysis
 
-I compared all models based on test accuracy:
+Using the tuned Gradient Boosting model, I extracted the top 15 most important features.
 
-Model	Test Accuracy
-Gradient Boosting	0.905832
-Random Forest	0.897340
-SVM	0.877108
-Decision Tree	0.835394
-Logistic Regression	0.820907
+ Top Predictors of Engagement:
 
-I observed that Gradient Boosting achieved the highest accuracy.
+AvgSessionDurationMinutes
 
-IN my next steps for next supervission sessions 
-I plan to analyze feature importance from tree-based models to identify the strongest predictors of engagement.
+SessionsPerWeek
 
-I may experiment with additional hyperparameter tuning and ensemble methods to further improve model performance.
+AchievementsUnlocked
 
-I will also explore cross-validation results to ensure model stability.
+PlayerLevel
+
+TotalPlayPerWeek
+
+These features strongly influence whether a player becomes highly engaged.
+
+ # Final Interpretation
+
+Engagement is primarily driven by player activity frequency, not demographics.
+
+Tree-based methods (GB, RF) significantly outperform linear models.
+
+Hyperparameter tuning increased performance by 2–5%, especially for Decision Tree and Gradient Boosting.
+
+The model can help game developers identify potential high-engagement or low-engagement players for retention strategies.
+
+ # Results Summary
+Model	Base Accuracy	Tuned Accuracy
+Gradient Boosting	0.905	0.910
+Random Forest	0.893	0.894
+Decision Tree	0.828	0.878
+SVM	0.879	0.853
+Logistic Regression	0.821	0.824
+
+# Best model: Gradient Boosting
+
+ # Conclusion
+
+This project demonstrates that player engagement can be accurately predicted using machine learning, with Gradient Boosting proving to be the most effective. The insights can support player retention, game design optimization, and personalized engagement strategies in the gaming industry.
