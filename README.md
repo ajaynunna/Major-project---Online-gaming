@@ -26,7 +26,6 @@ I built five machine learning models, evaluated them, and optimized the best-per
 
 The final selected model is Gradient Boosting, achieving 91% accuracy.
 
- Key Steps in the Workflow
 #  Exploratory Data Analysis (EDA)
 
 I analyzed distributions and relationships using:
