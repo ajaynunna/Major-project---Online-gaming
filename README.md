@@ -2,6 +2,7 @@
 
 This project focuses on predicting player engagement levels (High, Medium, Low) in online gaming using supervised machine learning models. The goal is to understand which gameplay and demographic factors influence player engagement, and to build a model that can accurately classify user behavior.
 
+
 # Project Overview
 
 I used a  Kaggle-style dataset containing 40,034 players with features such as:
